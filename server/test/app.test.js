@@ -39,12 +39,23 @@ test('geçerli katılımcıyı normalize ederek kaydeder', async () => {
   const response = await fetch(`${baseUrl}/api/participants`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ firstName: '  Ada ', lastName: ' Lovelace ', phone: '(555)-111-22-33', email: ' ADA@EXAMPLE.COM ' }),
+    body: JSON.stringify({ firstName: '  Ada ', lastName: ' Lovelace ', phone: '+905551112233', email: ' ADA@EXAMPLE.COM ' }),
   });
   const body = await response.json();
   assert.equal(response.status, 201);
   assert.equal(body.participant.firstName, 'Ada');
   assert.equal(records[0].email, 'ada@example.com');
+  assert.equal(records[0].phone, '5551112233');
+});
+
+test('başında sıfır bulunan telefonu 10 haneye normalize eder', async () => {
+  const response = await fetch(`${baseUrl}/api/participants`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ firstName: 'Grace', lastName: 'Hopper', phone: '05301793150', email: 'grace@example.com' }),
+  });
+  assert.equal(response.status, 201);
+  assert.equal(records.at(-1).phone, '5301793150');
 });
 
 test('geçersiz alanları reddeder', async () => {

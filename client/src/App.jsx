@@ -7,7 +7,11 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\(\d{3}\)-\d{3}-\d{2}-\d{2}$/;
 
 function formatPhone(value) {
-  const digits = value.replace(/\D/g, '').slice(0, 10);
+  let digits = value.replace(/\D/g, '');
+  if (digits.startsWith('0090') && digits.length >= 14) digits = digits.slice(4);
+  else if (digits.startsWith('90') && digits.length >= 12) digits = digits.slice(2);
+  else if (digits.startsWith('0') && digits.length >= 11) digits = digits.slice(1);
+  digits = digits.slice(0, 10);
   if (!digits) return '';
 
   let formatted = `(${digits.slice(0, 3)}`;
@@ -103,7 +107,7 @@ function App() {
               <Field label="Ad" name="firstName" value={form.firstName} error={errors.firstName} onChange={onChange} autoComplete="given-name" autoCapitalize="words" placeholder="Adınız" />
               <Field label="Soyad" name="lastName" value={form.lastName} error={errors.lastName} onChange={onChange} autoComplete="family-name" autoCapitalize="words" placeholder="Soyadınız" />
             </div>
-            <Field label="Telefon" name="phone" type="tel" inputMode="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" maxLength="15" placeholder="(XXX)-XXX-XX-XX" />
+            <Field label="Telefon" name="phone" type="tel" inputMode="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" placeholder="(XXX)-XXX-XX-XX" />
             <Field label="E-posta" name="email" type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={form.email} error={errors.email} onChange={onChange} autoComplete="email" placeholder="ornek@eposta.com" />
 
             <label className="kvkk-consent">

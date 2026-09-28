@@ -1,11 +1,19 @@
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^\(\d{3}\)-\d{3}-\d{2}-\d{2}$/;
+const phonePattern = /^\d{10}$/;
+
+function normalizePhone(value) {
+  let digits = value.replace(/\D/g, '');
+  if (digits.startsWith('0090') && digits.length === 14) digits = digits.slice(4);
+  else if (digits.startsWith('90') && digits.length === 12) digits = digits.slice(2);
+  else if (digits.startsWith('0') && digits.length === 11) digits = digits.slice(1);
+  return digits;
+}
 
 export function normalizeParticipant(input = {}) {
   return {
     firstName: typeof input.firstName === 'string' ? input.firstName.trim() : '',
     lastName: typeof input.lastName === 'string' ? input.lastName.trim() : '',
-    phone: typeof input.phone === 'string' ? input.phone.trim() : '',
+    phone: typeof input.phone === 'string' ? normalizePhone(input.phone) : '',
     email: typeof input.email === 'string' ? input.email.trim().toLowerCase() : '',
   };
 }
