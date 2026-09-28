@@ -127,7 +127,7 @@ function App() {
               {status.type !== 'loading' ? <span aria-hidden="true">→</span> : null}
             </button>
 
-            {status.type !== 'idle' && (
+            {status.type !== 'idle' && status.type !== 'success' && (
               <div className={`notice ${status.type}`} role={status.type === 'error' ? 'alert' : 'status'}>
                 {status.message}
               </div>
@@ -135,6 +135,24 @@ function App() {
           </form>
         </div>
       </section>
+
+      {status.type === 'success' && (
+        <div
+          className="modal-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setStatus({ type: 'idle', message: '' });
+          }}
+        >
+          <div className="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-message">
+            <span className="success-icon" aria-hidden="true">✓</span>
+            <h3 id="success-title">Kayıt tamamlandı</h3>
+            <p id="success-message">{status.message}</p>
+            <button className="modal-close" type="button" autoFocus onClick={() => setStatus({ type: 'idle', message: '' })}>
+              Tamam
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
