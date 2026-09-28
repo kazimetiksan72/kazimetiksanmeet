@@ -88,11 +88,11 @@ function App() {
 
           <form onSubmit={onSubmit} noValidate>
             <div className="name-row">
-              <Field label="Ad" name="firstName" value={form.firstName} error={errors.firstName} onChange={onChange} autoComplete="given-name" placeholder="Adınız" />
-              <Field label="Soyad" name="lastName" value={form.lastName} error={errors.lastName} onChange={onChange} autoComplete="family-name" placeholder="Soyadınız" />
+              <Field label="Ad" name="firstName" value={form.firstName} error={errors.firstName} onChange={onChange} autoComplete="given-name" autoCapitalize="words" placeholder="Adınız" />
+              <Field label="Soyad" name="lastName" value={form.lastName} error={errors.lastName} onChange={onChange} autoComplete="family-name" autoCapitalize="words" placeholder="Soyadınız" />
             </div>
-            <Field label="Telefon" name="phone" type="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" placeholder="+90 5__ ___ __ __" />
-            <Field label="E-posta" name="email" type="email" value={form.email} error={errors.email} onChange={onChange} autoComplete="email" placeholder="ornek@eposta.com" />
+            <Field label="Telefon" name="phone" type="tel" inputMode="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" placeholder="+90 5__ ___ __ __" />
+            <Field label="E-posta" name="email" type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={form.email} error={errors.email} onChange={onChange} autoComplete="email" placeholder="ornek@eposta.com" />
 
             <label className="kvkk-consent">
               <input
