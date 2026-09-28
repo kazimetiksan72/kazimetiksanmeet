@@ -20,6 +20,7 @@ function App() {
   const [kvkkAccepted, setKvkkAccepted] = useState(false);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: 'idle', message: '' });
+  const isFormComplete = Object.values(form).every((value) => value.trim().length > 0) && kvkkAccepted;
 
   const onChange = ({ target }) => {
     setForm((current) => ({ ...current, [target.name]: target.value }));
@@ -104,7 +105,7 @@ function App() {
               </span>
             </label>
 
-            <button type="submit" disabled={!kvkkAccepted || status.type === 'loading'} data-loading={status.type === 'loading'}>
+            <button type="submit" disabled={!isFormComplete || status.type === 'loading'} data-loading={status.type === 'loading'}>
               {status.type === 'loading' ? <span className="spinner" aria-hidden="true" /> : null}
               {status.type === 'loading' ? 'Kaydediliyor' : 'Kaydımı tamamla'}
               {status.type !== 'loading' ? <span aria-hidden="true">→</span> : null}
