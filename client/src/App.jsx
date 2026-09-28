@@ -64,12 +64,12 @@ function App() {
           />
           <a
             className="intro-qr"
-            href="https://mintayvalik.com.tr/"
+            href="https://meet.kazimetiksan.com/"
             target="_blank"
             rel="noreferrer"
-            aria-label="Mint Ayvalık web sitesini aç"
+            aria-label="Etkinlik kayıt sayfasını aç"
           >
-            <img src={qrSource} alt="https://mintayvalik.com.tr/ için QR kod" />
+            <img src={qrSource} alt="https://meet.kazimetiksan.com/ için QR kod" />
           </a>
         </div>
         <div className="intro-copy">
