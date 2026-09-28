@@ -1,6 +1,6 @@
 # Mint Form
 
-React, Node.js ve yerel MongoDB ile hazırlanmış uçtan uca katılımcı kayıt uygulaması. Form; ad, soyad, telefon ve e-posta bilgilerini doğrular, API üzerinden MongoDB'ye kaydeder ve aynı e-posta ile ikinci kaydı engeller.
+React, Node.js ve MongoDB ile hazırlanmış uçtan uca katılımcı kayıt uygulaması. Form; ad, soyad, telefon ve e-posta bilgilerini doğrular, API üzerinden MongoDB'ye kaydeder ve aynı e-posta ile ikinci kaydı engeller. Vercel'de frontend ve serverless API tek proje olarak çalışır.
 
 ## Gereksinimler
 
@@ -60,6 +60,29 @@ npm run build
 ```
 
 Testler sağlık kontrolünü, geçerli kaydı, alan doğrulamasını ve yinelenen e-posta davranışını gerçek HTTP istekleriyle sınar. Üretim istemci çıktısı `client/dist` klasörüne oluşturulur.
+
+## Vercel'e dağıtım
+
+Bu depo tek bir Vercel projesi için hazırdır. Vercel projesini oluştururken deponun kök dizinini seçin; `vercel.json` aşağıdaki ayarları otomatik uygular:
+
+- Framework: Vite
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `client/dist`
+- API: `/api/health` ve `/api/participants`
+
+Vercel projesinde aşağıdaki ortam değişkenini Production, Preview ve Development ortamları için tanımlayın:
+
+```env
+MONGODB_URI=mongodb+srv://KULLANICI:SIFRE@SUNUCU/mint-form
+```
+
+MongoDB Atlas kullanıyorsanız veritabanı kullanıcısına yazma yetkisi verin ve Vercel fonksiyonlarının Atlas'a bağlanabilmesi için Network Access ayarını yapılandırın. Frontend ile API aynı Vercel domain'inde çalıştığından production için `CLIENT_ORIGIN` veya ayrı bir backend URL'si gerekmez.
+
+Dağıtımdan sonra şu adresleri kontrol edin:
+
+- Site: `https://PROJE_ADI.vercel.app`
+- Sağlık kontrolü: `https://PROJE_ADI.vercel.app/api/health`
 
 ## API
 
