@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import logoSource from '../../logo.svg';
 import qrSource from './assets/mint-ayvalik-qr.svg';
 
 const initialForm = { firstName: '', lastName: '', phone: '', email: '' };
@@ -70,14 +69,8 @@ function App() {
 
   return (
     <main className="page-shell">
-      <section className="intro" aria-labelledby="page-title">
+      <section className="intro" aria-label="Etkinlik tanıtımı">
         <div className="intro-header">
-          <div
-            className="brand-logo"
-            role="img"
-            aria-label="Mint Ayvalık"
-            style={{ '--logo-source': `url("${logoSource}")` }}
-          />
           <a
             className="intro-qr"
             href="https://meet.kazimetiksan.com/"
@@ -89,7 +82,6 @@ function App() {
           </a>
         </div>
         <div className="intro-copy">
-          <h1 id="page-title">Yeni fikirlerin<br />buluşma noktası.</h1>
           <p className="description">İlham veren konuşmalar, üretken sohbetler ve yeni bağlantılar için aramıza katılın.</p>
         </div>
       </section>
