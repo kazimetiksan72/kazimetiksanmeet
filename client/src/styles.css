@@ -39,13 +39,13 @@ h1 { font-family: 'Manrope', sans-serif; font-size: clamp(44px, 5.7vw, 78px); fo
 .intro-qr:focus-visible { outline: 3px solid #ddec8d; outline-offset: 4px; }
 .intro-qr img { display: block; width: 148px; height: 148px; }
 
-.form-panel { padding: 48px clamp(28px, 7vw, 120px); display: grid; place-items: center; background: #f6f4ed; }
-.form-wrap { width: min(100%, 530px); }
+.form-panel { width: 100%; min-width: 0; padding: 48px clamp(28px, 7vw, 120px); display: grid; place-items: center; overflow-x: hidden; overflow-x: clip; background: #f6f4ed; }
+.form-wrap { width: min(100%, 530px); min-width: 0; }
 h2 { font-family: 'Manrope', sans-serif; color: #173b33; font-size: clamp(34px, 4vw, 48px); line-height: 1.1; letter-spacing: -.04em; font-weight: 500; margin: 0; }
 .form-lead { color: #75847f; margin: 13px 0 36px; font-size: 14px; }
-form { display: grid; gap: 21px; }
-.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.field { display: grid; gap: 8px; color: #31534a; font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+form { display: grid; min-width: 0; gap: 21px; }
+.name-row { display: grid; min-width: 0; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: grid; min-width: 0; gap: 8px; color: #31534a; font-size: 13px; font-weight: 600; letter-spacing: .04em; }
 .field input { width: 100%; border: 1px solid #d2d9d4; border-radius: 3px; background: rgba(255,255,255,.62); color: #173b33; padding: 14px 15px; outline: none; transition: border-color .2s, box-shadow .2s, background .2s; }
 .field input::placeholder { color: #a6afab; }
 .field input:hover { border-color: #afbbb6; }
@@ -83,6 +83,7 @@ button:has(.spinner)::before { display: none; }
   .page-shell { grid-template-columns: 1fr; }
   .intro { display: none; }
   .form-panel { min-height: 100vh; min-height: 100svh; padding-top: 42px; padding-bottom: 70px; }
+  .field input { font-size: 16px; }
 }
 @media (min-width: 801px) and (max-width: 950px) {
   .intro-header { gap: 12px; }
