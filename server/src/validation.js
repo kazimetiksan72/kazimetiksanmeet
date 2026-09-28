@@ -1,5 +1,5 @@
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^\+?[0-9][0-9\s()-]{8,19}$/;
+const phonePattern = /^\(\d{3}\)-\d{3}-\d{2}-\d{2}$/;
 
 export function normalizeParticipant(input = {}) {
   return {

@@ -4,7 +4,18 @@ import qrSource from './assets/mint-ayvalik-qr.svg';
 
 const initialForm = { firstName: '', lastName: '', phone: '', email: '' };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^\+?[0-9][0-9\s()-]{8,19}$/;
+const phonePattern = /^\(\d{3}\)-\d{3}-\d{2}-\d{2}$/;
+
+function formatPhone(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 10);
+  if (!digits) return '';
+
+  let formatted = `(${digits.slice(0, 3)}`;
+  if (digits.length > 3) formatted += `)-${digits.slice(3, 6)}`;
+  if (digits.length > 6) formatted += `-${digits.slice(6, 8)}`;
+  if (digits.length > 8) formatted += `-${digits.slice(8, 10)}`;
+  return formatted;
+}
 
 function validate(values) {
   const errors = {};
@@ -23,7 +34,8 @@ function App() {
   const isFormComplete = Object.values(form).every((value) => value.trim().length > 0) && kvkkAccepted;
 
   const onChange = ({ target }) => {
-    setForm((current) => ({ ...current, [target.name]: target.value }));
+    const value = target.name === 'phone' ? formatPhone(target.value) : target.value;
+    setForm((current) => ({ ...current, [target.name]: value }));
     setErrors((current) => ({ ...current, [target.name]: undefined }));
     if (status.type !== 'idle') setStatus({ type: 'idle', message: '' });
   };
@@ -91,7 +103,7 @@ function App() {
               <Field label="Ad" name="firstName" value={form.firstName} error={errors.firstName} onChange={onChange} autoComplete="given-name" autoCapitalize="words" placeholder="Adınız" />
               <Field label="Soyad" name="lastName" value={form.lastName} error={errors.lastName} onChange={onChange} autoComplete="family-name" autoCapitalize="words" placeholder="Soyadınız" />
             </div>
-            <Field label="Telefon" name="phone" type="tel" inputMode="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" placeholder="+90 5__ ___ __ __" />
+            <Field label="Telefon" name="phone" type="tel" inputMode="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" maxLength="15" placeholder="(XXX)-XXX-XX-XX" />
             <Field label="E-posta" name="email" type="email" inputMode="email" autoCapitalize="none" spellCheck="false" value={form.email} error={errors.email} onChange={onChange} autoComplete="email" placeholder="ornek@eposta.com" />
 
             <label className="kvkk-consent">

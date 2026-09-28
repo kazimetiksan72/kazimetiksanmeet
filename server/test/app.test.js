@@ -39,7 +39,7 @@ test('geçerli katılımcıyı normalize ederek kaydeder', async () => {
   const response = await fetch(`${baseUrl}/api/participants`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ firstName: '  Ada ', lastName: ' Lovelace ', phone: '+90 555 111 22 33', email: ' ADA@EXAMPLE.COM ' }),
+    body: JSON.stringify({ firstName: '  Ada ', lastName: ' Lovelace ', phone: '(555)-111-22-33', email: ' ADA@EXAMPLE.COM ' }),
   });
   const body = await response.json();
   assert.equal(response.status, 201);
@@ -62,7 +62,7 @@ test('yinelenen e-postayı anlaşılır yanıtla reddeder', async () => {
   const response = await fetch(`${baseUrl}/api/participants`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', phone: '+90 555 111 22 33', email: 'ada@example.com' }),
+    body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', phone: '(555)-111-22-33', email: 'ada@example.com' }),
   });
   const body = await response.json();
   assert.equal(response.status, 409);
