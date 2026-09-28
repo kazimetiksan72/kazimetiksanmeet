@@ -96,9 +96,6 @@ function App() {
 
       <section className="form-panel" aria-labelledby="form-title">
         <div className="form-wrap">
-          <div className="mobile-logo">
-            <img src={logoSource} alt="Mint Ayvalık" />
-          </div>
           <h2 id="form-title">Aramıza katılın.</h2>
           <p className="form-lead">Bilgilerinizi bırakın, etkinlik detaylarını size gönderelim.</p>
 
