@@ -17,6 +17,7 @@ function validate(values) {
 
 function App() {
   const [form, setForm] = useState(initialForm);
+  const [kvkkAccepted, setKvkkAccepted] = useState(false);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ type: 'idle', message: '' });
 
@@ -43,6 +44,7 @@ function App() {
       if (!response.ok) throw new Error(data.message || 'Kayıt tamamlanamadı. Lütfen tekrar deneyin.');
 
       setForm(initialForm);
+      setKvkkAccepted(false);
       setStatus({ type: 'success', message: data.message || 'Kaydınız başarıyla alındı!' });
     } catch (error) {
       setStatus({ type: 'error', message: error.message });
@@ -91,7 +93,18 @@ function App() {
             <Field label="Telefon" name="phone" type="tel" value={form.phone} error={errors.phone} onChange={onChange} autoComplete="tel" placeholder="+90 5__ ___ __ __" />
             <Field label="E-posta" name="email" type="email" value={form.email} error={errors.email} onChange={onChange} autoComplete="email" placeholder="ornek@eposta.com" />
 
-            <button type="submit" disabled={status.type === 'loading'}>
+            <label className="kvkk-consent">
+              <input
+                type="checkbox"
+                checked={kvkkAccepted}
+                onChange={(event) => setKvkkAccepted(event.target.checked)}
+              />
+              <span>
+                <a href="/kvkk.html" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni okudum ve bilgilendirildim.
+              </span>
+            </label>
+
+            <button type="submit" disabled={!kvkkAccepted || status.type === 'loading'} data-loading={status.type === 'loading'}>
               {status.type === 'loading' ? <span className="spinner" aria-hidden="true" /> : null}
               {status.type === 'loading' ? 'Kaydediliyor' : 'Kaydımı tamamla'}
               {status.type !== 'loading' ? <span aria-hidden="true">→</span> : null}
@@ -102,7 +115,6 @@ function App() {
                 {status.message}
               </div>
             )}
-            <p className="privacy">Kaydolarak iletişim bilgilerinizin etkinlik bilgilendirmeleri için kullanılmasını kabul edersiniz.</p>
           </form>
         </div>
       </section>

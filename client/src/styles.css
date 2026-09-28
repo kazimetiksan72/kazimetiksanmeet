@@ -53,12 +53,18 @@ form { display: grid; gap: 21px; }
 .field input:focus { border-color: #347564; background: #fff; box-shadow: 0 0 0 3px rgba(52,117,100,.1); }
 .field.has-error input { border-color: #bd6658; }
 .field small { color: #aa4f43; letter-spacing: 0; font-weight: 400; }
+.kvkk-consent { display: flex; align-items: flex-start; gap: 11px; color: #65746f; font-size: 12px; line-height: 1.55; cursor: pointer; }
+.kvkk-consent input { width: 18px; height: 18px; flex: 0 0 auto; margin: 0; accent-color: #17483d; cursor: pointer; }
+.kvkk-consent a { color: #17483d; font-weight: 600; text-underline-offset: 3px; }
+.kvkk-consent a:hover { color: #246354; }
+.kvkk-consent a:focus-visible { outline: 2px solid rgba(52,117,100,.35); outline-offset: 3px; border-radius: 2px; }
 button { border: 0; border-radius: 3px; padding: 16px 19px; margin-top: 5px; display: flex; justify-content: center; align-items: center; gap: 12px; background: #17483d; color: #fff; cursor: pointer; font-weight: 600; transition: transform .15s, background .2s; }
 button span:last-child { margin-left: auto; font-size: 20px; font-weight: 400; }
 button::before { content: ''; width: 20px; }
 button:hover:not(:disabled) { background: #246354; transform: translateY(-1px); }
 button:focus-visible { outline: 3px solid rgba(52,117,100,.28); outline-offset: 2px; }
-button:disabled { opacity: .75; cursor: wait; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button[data-loading='true'] { opacity: .75; cursor: wait; }
 .spinner { width: 17px; height: 17px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
 button:has(.spinner)::before { display: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -66,7 +72,6 @@ button:has(.spinner)::before { display: none; }
 .notice.success { color: #205e4f; background: #e0eee7; }
 .notice.error { color: #8a3e34; background: #f5e5e2; }
 .notice.loading { color: #31534a; background: #e8ece9; }
-.privacy { color: #9aa39f; font-size: 10px; line-height: 1.5; text-align: center; margin: -4px 25px 0; }
 
 @media (max-width: 800px) {
   .page-shell { grid-template-columns: 1fr; }
