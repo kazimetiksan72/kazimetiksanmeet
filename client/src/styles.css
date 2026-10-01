@@ -14,7 +14,23 @@ button, input { font: inherit; }
 .page-shell { min-height: 100vh; display: grid; grid-template-columns: 0.9fr 1.1fr; }
 .intro { background: #17483d; color: #f6f3e9; padding: 48px clamp(38px, 6vw, 94px); display: flex; flex-direction: column; position: relative; overflow: hidden; }
 .intro::after { content: ''; position: absolute; width: 520px; height: 520px; border: 1px solid rgba(216, 236, 128, .14); border-radius: 50%; right: -260px; bottom: -220px; box-shadow: 0 0 0 70px rgba(216, 236, 128, .025), 0 0 0 140px rgba(216, 236, 128, .018); }
-.intro-header { position: relative; z-index: 1; display: flex; align-items: flex-start; justify-content: center; width: 100%; }
+.intro-header { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 32px; width: 100%; }
+.brand-logo {
+  position: relative;
+  width: 170px;
+  height: 102px;
+  flex: 0 0 auto;
+  background: #fff;
+  -webkit-mask-image: var(--logo-source);
+  -webkit-mask-size: 973px auto;
+  -webkit-mask-position: -636px -909px;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: var(--logo-source);
+  mask-mode: luminance;
+  mask-size: 973px auto;
+  mask-position: -636px -909px;
+  mask-repeat: no-repeat;
+}
 .intro-copy { margin: auto 0; position: relative; z-index: 1; }
 .description { color: #c3d2cd; font-size: 21px; line-height: 1.55; max-width: 520px; margin: 28px 0 42px; }
 .intro-qr { display: block; flex: 0 0 auto; padding: 9px; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; background: #f6f4ed; text-decoration: none; box-shadow: 0 14px 34px rgba(5,34,27,.18); transition: transform .2s, box-shadow .2s; }
@@ -69,6 +85,8 @@ button:has(.spinner)::before { display: none; }
   .field input { font-size: 16px; }
 }
 @media (min-width: 801px) and (max-width: 950px) {
+  .intro-header { gap: 24px; }
+  .brand-logo { width: 150px; height: 90px; -webkit-mask-size: 858px auto; -webkit-mask-position: -561px -802px; mask-size: 858px auto; mask-position: -561px -802px; }
   .intro-qr { padding: 8px; }
   .intro-qr img { width: 190px; height: 190px; }
 }
